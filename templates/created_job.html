@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ job.title }}</h3>
+                <h5 class="text-muted">{{ job.company }} - {{ job.location }}</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Responsibilities</h5>
+                <ul class="list-group list-group-flush">
+                    {% for responsibility in job.responsibilities %}
+                    <li class="list-group-item">{{ responsibility }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <h5 class="card-title">Skills Required</h5>
+                <ul class="list-group list-group-flush">
+                    {% for skill in job.skills %}
+                    <li class="list-group-item">{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <h5 class="card-title">Experience Required</h5>
+                <p>{{ job.experience_required }}</p>
+
+                <h5 class="card-title">Education Required</h5>
+                <p>{{ job.education_required }}</p>
+
+                <h5 class="card-title">Employment Type</h5>
+                <p>{{ job.employment_type }}</p>
+
+                <h5 class="card-title">Salary</h5>
+                <p>${{ job.salary }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

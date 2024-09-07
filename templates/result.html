@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Form</title>
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .experience-group, .education-group, .project-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/display" method="post">
+        <!-- Basic Info -->
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="Name" value="{{ resume_data.Name }}">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ resume_data.email }}">
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="MobileNO" value="{{ resume_data.MobileNO }}">
+        </div>
+
+        <!-- Education -->
+        <div class="form-group" id="education-section">
+            <h3>Education</h3>
+            {% for edu in resume_data.Education %}
+                <div class="education-group">
+                    <label>College Name:</label>
+                    <input type="text" name="Education[][collegeName]" value="{{ edu.collegeName }}">
+
+                    <label>Degree:</label>
+                    <input type="text" name="Education[][degree]" value="{{ edu.degree }}">
+
+                    <label>Marks:</label>
+                    <input type="number" name="Education[][marks]" value="{{ edu.marks }}">
+
+                    <label>Starting Period:</label>
+                    <input type="text" name="Education[][startingPeriod][]" value="{{ edu.startingPeriod[0] or '' }}">
+                    <input type="number" name="Education[][startingPeriod][]" value="{{ edu.startingPeriod[1] or '' }}">
+
+                    <label>Ending Period:</label>
+                    <input type="text" name="Education[][endingPeriod][]" value="{{ edu.endingPeriod[0] or '' }}">
+                    <input type="number" name="Education[][endingPeriod][]" value="{{ edu.endingPeriod[1] or '' }}">
+
+                    <button type="button" onclick="removeItem(this)">Remove Education</button>
+                </div>
+            {% endfor %}
+            <button type="button" onclick="addEducation()">Add Education</button>
+        </div>
+
+        <!-- Projects -->
+        <div class="form-group" id="projects-section">
+            <h3>Projects</h3>
+            {% for project in resume_data.Projects %}
+                <div class="project-group">
+                    <label>Project Name:</label>
+                    <input type="text" name="Projects[][name]" value="{{ project.name }}">
+
+                    <label>Tools & Technologies:</label>
+                    <div class="tools-container">
+                        {% for tool in project.tools_technologies %}
+                            <input type="text" name="Projects[][tools_technologies][]" value="{{ tool }}">
+                        {% endfor %}
+                        <button type="button" onclick="addTool(this)">Add Tool</button>
+                    </div>
+
+                    <label>Skills:</label>
+                    <div class="skills-container">
+                        {% for skill in project.skills %}
+                            <input type="text" name="Projects[][skills][]" value="{{ skill }}">
+                        {% endfor %}
+                        <button type="button" onclick="addSkill(this)">Add Skill</button>
+                    </div>
+
+                    <label>Duration (in months):</label>
+                    <input type="number" name="Projects[][durationInMonths]" value="{{ project.durationInMonths }}">
+
+                    <button type="button" onclick="removeItem(this)">Remove Project</button>
+                </div>
+            {% endfor %}
+            <button type="button" onclick="addProject()">Add Project</button>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-group" id="experience-section">
+            <h3>Experience</h3>
+            {% for exp in resume_data.Experience %}
+                <div class="experience-group">
+                    <label>Position:</label>
+                    <input type="text" name="Experience[][position]" value="{{ exp.position }}">
+
+                    <label>Company Name:</label>
+                    <input type="text" name="Experience[][companyName]" value="{{ exp.companyName }}">
+
+                    <label>Starting Period:</label>
+                    <input type="text" name="Experience[][startingPeriod][]" value="{{ exp.startingPeriod[0] or '' }}">
+                    <input type="number" name="Experience[][startingPeriod][]" value="{{ exp.startingPeriod[1] or '' }}">
+
+                    <label>Ending Period:</label>
+                    <input type="text" name="Experience[][endingPeriod][]" value="{{ exp.endingPeriod[0] or '' }}">
+                    <input type="number" name="Experience[][endingPeriod][]" value="{{ exp.endingPeriod[1] or '' }}">
+
+                    <label>Tools & Technologies:</label>
+                    <div class="experience-tools-container">
+                        {% for tool in exp.tools_technologies %}
+                            <input type="text" name="Experience[][tools_technologies][]" value="{{ tool }}">
+                        {% endfor %}
+                        <button type="button" onclick="addExperienceTool(this)">Add Tool</button>
+                    </div>
+
+                    <label>Skills Learnt:</label>
+                    <div class="experience-skills-container">
+                        {% for skill in exp.skills_learnt %}
+                            <input type="text" name="Experience[][skills_learnt][]" value="{{ skill }}">
+                        {% endfor %}
+                        <button type="button" onclick="addExperienceSkill(this)">Add Skill</button>
+                    </div>
+
+                    <button type="button" onclick="removeItem(this)">Remove Experience</button>
+                </div>
+            {% endfor %}
+            <button type="button" onclick="addExperience()">Add Experience</button>
+        </div>
+
+        <!-- Skills -->
+        <div class="form-group" id="skills-section">
+            <h3>Skills</h3>
+            <div id="skills-list">
+                {% for skill in resume_data.Skills %}
+                    <input type="text" name="Skills[]" value="{{ skill }}">
+                {% endfor %}
+            </div>
+            <button type="button" onclick="addSkillInput()">Add Skill</button>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <script>
+        function addEducation() {
+            const section = document.getElementById('education-section');
+            const div = document.createElement('div');
+            div.className = 'education-group';
+
+            div.innerHTML = `
+                <label>College Name:</label>
+                <input type="text" name="Education[][collegeName]" value="">
+
+                <label>Degree:</label>
+                <input type="text" name="Education[][degree]" value="">
+
+                <label>Marks:</label>
+                <input type="number" name="Education[][marks]" value="">
+
+                <label>Starting Period:</label>
+                <input type="text" name="Education[][startingPeriod][]" value="">
+                <input type="number" name="Education[][startingPeriod][]" value="">
+
+                <label>Ending Period:</label>
+                <input type="text" name="Education[][endingPeriod][]" value="">
+                <input type="number" name="Education[][endingPeriod][]" value="">
+
+                <button type="button" onclick="removeItem(this)">Remove Education</button>
+            `;
+            section.appendChild(div);
+        }
+
+        function addProject() {
+            const section = document.getElementById('projects-section');
+            const div = document.createElement('div');
+            div.className = 'project-group';
+
+            div.innerHTML = `
+                <label>Project Name:</label>
+                <input type="text" name="Projects[][name]" value="">
+
+                <label>Tools & Technologies:</label>
+                <div class="tools-container">
+                    <input type="text" name="Projects[][tools_technologies][]" value="">
+                    <button type="button" onclick="addTool(this)">Add Tool</button>
+                </div>
+
+                <label>Skills:</label>
+                <div class="skills-container">
+                    <input type="text" name="Projects[][skills][]" value="">
+                    <button type="button" onclick="addSkill(this)">Add Skill</button>
+                </div>
+
+                <label>Duration (in months):</label>
+                <input type="number" name="Projects[][durationInMonths]" value="">
+
+                <button type="button" onclick="removeItem(this)">Remove Project</button>
+            `;
+            section.appendChild(div);
+        }
+
+        function addExperience() {
+            const section = document.getElementById('experience-section');
+            const div = document.createElement('div');
+            div.className = 'experience-group';
+
+            div.innerHTML = `
+                <label>Position:</label>
+                <input type="text" name="Experience[][position]" value="">
+
+                <label>Company Name:</label>
+                <input type="text" name="Experience[][companyName]" value="">
+
+                <label>Starting Period:</label>
+                <input type="text" name="Experience[][startingPeriod][]" value="">
+                <input type="number" name="Experience[][startingPeriod][]" value="">
+
+                <label>Ending Period:</label>
+                <input type="text" name="Experience[][endingPeriod][]" value="">
+                <input type="number" name="Experience[][endingPeriod][]" value="">
+
+                <label>Tools & Technologies:</label>
+                <div class="experience-tools-container">
+                    <input type="text" name="Experience[][tools_technologies][]" value="">
+                    <button type="button" onclick="addExperienceTool(this)">Add Tool</button>
+                </div>
+
+                <label>Skills Learnt:</label>
+                <div class="experience-skills-container">
+                    <input type="text" name="Experience[][skills_learnt][]" value="">
+                    <button type="button" onclick="addExperienceSkill(this)">Add Skill</button>
+                </div>
+
+                <button type="button" onclick="removeItem(this)">Remove Experience</button>
+            `;
+            section.appendChild(div);
+        }
+
+        function removeItem(button) {
+            button.parentElement.remove();
+        }
+
+        function addTool(button) {
+            const container = button.parentElement;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = container.querySelector('input').name;
+            container.insertBefore(input, button);
+        }
+
+        function addSkill(button) {
+            const container = button.parentElement;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = container.querySelector('input').name;
+            container.insertBefore(input, button);
+        }
+
+        function addExperienceTool(button) {
+            const container = button.parentElement;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'Experience[][tools_technologies][]';
+            container.insertBefore(input, button);
+        }
+
+        function addExperienceSkill(button) {
+            const container = button.parentElement;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'Experience[][skills_learnt][]';
+            container.insertBefore(input, button);
+        }
+    </script>
+</body>
+</html>

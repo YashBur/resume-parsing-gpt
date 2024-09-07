@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submitted Resume Data</title>
+</head>
+<body>
+    <h1>Submitted Resume Data</h1>
+
+    <h2>Basic Info</h2>
+    <p><strong>Name:</strong> {{ resume_data.get('Name', [''])[0] }}</p>
+    <p><strong>Email:</strong> {{ resume_data.get('email', [''])[0] }}</p>
+    <p><strong>Mobile Number:</strong> {{ resume_data.get('MobileNO', [''])[0] }}</p>
+
+    <h2>Education</h2>
+    {% if resume_data.get('Education[][collegeName]') %}
+        {% for i in range(resume_data['Education[][collegeName]']|length) %}
+            <div>
+                <p><strong>College Name:</strong> {{ resume_data['Education[][collegeName]'][i] or 'None' }}</p>
+                <p><strong>Degree:</strong> {{ resume_data['Education[][degree]'][i] or 'None' }}</p>
+                <p><strong>Marks:</strong> {{ resume_data['Education[][marks]'][i] or 'None' }}</p>
+                <p><strong>Starting Period:</strong> {{ resume_data['Education[][startingPeriod][]'][2*i] or 'None' }} {{ resume_data['Education[][startingPeriod][]'][2*i+1] or 'None' }}</p>
+                <p><strong>Ending Period:</strong> {{ resume_data['Education[][endingPeriod][]'][2*i] or 'None' }} {{ resume_data['Education[][endingPeriod][]'][2*i+1] or 'None' }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No Education Data</p>
+    {% endif %}
+
+    <h2>Projects</h2>
+    {% if resume_data.get('Projects[][name]') %}
+        {% for i in range(resume_data['Projects[][name]']|length) %}
+            <div>
+                <p><strong>Project Name:</strong> {{ resume_data['Projects[][name]'][i] or 'None' }}</p>
+                <p><strong>Tools & Technologies:</strong></p>
+                <ul>
+                    {% for tool in resume_data['Projects[][tools_technologies][]'] %}
+                        <li>{{ tool or 'None' }}</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Skills:</strong></p>
+                <ul>
+                    {% for skill in resume_data['Projects[][skills][]'] %}
+                        <li>{{ skill or 'None' }}</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Duration (in months):</strong> {{ resume_data['Projects[][durationInMonths]'][i] or 'None' }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No Projects Data</p>
+    {% endif %}
+
+    <h2>Experience</h2>
+    {% if resume_data.get('Experience[][position]') %}
+        {% for i in range(resume_data['Experience[][position]']|length) %}
+            <div>
+                <p><strong>Position:</strong> {{ resume_data['Experience[][position]'][i] or 'None' }}</p>
+                <p><strong>Company Name:</strong> {{ resume_data['Experience[][companyName]'][i] or 'None' }}</p>
+                <p><strong>Starting Period:</strong> {{ resume_data['Experience[][startingPeriod][]'][2*i] or 'None' }} {{ resume_data['Experience[][startingPeriod][]'][2*i+1] or 'None' }}</p>
+                <p><strong>Ending Period:</strong> {{ resume_data['Experience[][endingPeriod][]'][2*i] or 'None' }} {{ resume_data['Experience[][endingPeriod][]'][2*i+1] or 'None' }}</p>
+                <p><strong>Tools & Technologies:</strong></p>
+                <ul>
+                    {% for tool in resume_data['Experience[][tools_technologies][]'] %}
+                        <li>{{ tool or 'None' }}</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Skills Learnt:</strong></p>
+                <ul>
+                    {% for skill in resume_data['Experience[][skills_learnt][]'] %}
+                        <li>{{ skill or 'None' }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No Experience Data</p>
+    {% endif %}
+
+    <h2>Skills</h2>
+    {% if resume_data.get('Skills[]') %}
+        <ul>
+            {% for skill in resume_data['Skills[]'] %}
+                <li>{{ skill or 'None' }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Skills Data</p>
+    {% endif %}
+</body>
+</html>

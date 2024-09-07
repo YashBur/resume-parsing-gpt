@@ -1,0 +1,48 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+</style>
+
+<h1>{{ title }}</h1>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Job Title</th>
+        <th>Filename</th>
+        <th>Sim Score</th>
+        <th>Total Weight</th>
+        <th>Final Score</th>
+        <th>View Resume</th>
+    </tr>
+    {% for application in applications %}
+    <tr>
+        <td>{{ application[8] }}</td>
+        <td>{{ application[4] }}</td>
+        <td>{{ application[2] }}</td>
+        <td>{{ application[5] }}</td>
+        <td>{{ application[6] }}</td>
+        <td>{{ application[7] }}</td>
+        <td><a href="{{ url_for('static', filename='resumes/' + application[2]) }}">View PDF</a></td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Job</title>
+    <script>
+        function addField(containerId, inputName) {
+            const container = document.getElementById(containerId);
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = inputName;
+            input.placeholder = 'Enter value';
+            container.appendChild(input);
+            container.appendChild(document.createElement('br'));
+        }
+    </script>
+</head>
+<body>
+    <h1>Create Job</h1>
+    <form action="{{ url_for('create_job') }}" method="POST">
+        <label for="title">Job Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required><br><br>
+        
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br><br>
+        
+        <label for="responsibilities">Responsibilities:</label>
+        <div id="responsibilities-container">
+            <input type="text" name="responsibilities[]" placeholder="Enter responsibility" required>
+            <br>
+        </div>
+        <button type="button" onclick="addField('responsibilities-container', 'responsibilities[]')">Add Responsibility</button>
+        <br><br>
+        
+        <label for="skills">Skills Required:</label>
+        <div id="skills-container">
+            <input type="text" name="skills[]" placeholder="Enter skill" required>
+            <br>
+        </div>
+        <button type="button" onclick="addField('skills-container', 'skills[]')">Add Skill</button>
+        <br><br>
+        
+        <label for="experience_required">Experience Required:</label>
+        <input type="text" id="experience_required" name="experience_required" required><br><br>
+        
+        <label for="education_required">Education Required:</label>
+        <input type="text" id="education_required" name="education_required" required><br><br>
+
+        <label for="employment_type">Employment Type:</label>
+        <input type="text" id="employment_type" name="employment_type" required><br><br>
+
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" required><br><br>
+        
+        <input type="submit" value="Create Job">
+    </form>
+</body>
+</html>

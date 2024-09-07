@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Resumes</title>
+</head>
+<body>
+    <h1>Job Resumes</h1>
+    <table border="1">
+        <tr>
+            <th>Job ID</th>
+            <th>Resume Filename</th>
+            <th>View PDF</th>
+        </tr>
+        {% for job_id, filename in job_resumes %}
+        <tr>
+            <td>{{ job_id }}</td>
+            <td>{{ filename }}</td>
+            <td><a href="{{ url_for('static', filename='resumes/' + filename) }}">View PDF</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
