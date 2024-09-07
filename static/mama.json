@@ -1,0 +1,178 @@
+{
+    "Name": "Anand Tiwari",
+    "Email": "anandgirishtiwari@gmail.com",
+    "MobileNO": null,
+    "Education": [
+        {
+            "collegeName": "Sardar Patel Institute of Technology",
+            "degree": "B.Tech Computer Science and Engineering (Data Science)",
+            "marks": 74.1,
+            "startingPeriod": [
+                "July",
+                "2022"
+            ],
+            "endingPeriod": [
+                "Expected",
+                "2025"
+            ]
+        },
+        {
+            "collegeName": "Pace Junior Science College",
+            "degree": "High School Certificate (HSC)",
+            "marks": 87.67,
+            "startingPeriod": [
+                "2019"
+            ],
+            "endingPeriod": [
+                "2021"
+            ]
+        }
+    ],
+    "Projects": [
+        {
+            "name": "AI Interview Mocker",
+            "tools_technologies": [
+                "React",
+                "Drizzle ORM",
+                "PostgreSQL",
+                "Gemini API",
+                "Clerk",
+                "Vercel"
+            ],
+            "skills": [
+                "AI integration",
+                "Interview preparation"
+            ],
+            "durationInMonths": 1
+        },
+        {
+            "name": "Emergency Response System",
+            "tools_technologies": [
+                "Next.js",
+                "Express.js",
+                "Flutter",
+                "MongoDB"
+            ],
+            "skills": [
+                "Real-time geolocation",
+                "Hospital resource management"
+            ],
+            "durationInMonths": null
+        },
+        {
+            "name": "Virtual Gym Trainer",
+            "tools_technologies": [
+                "Next.js",
+                "Django",
+                "Python",
+                "TensorFlow",
+                "scikit-learn",
+                "Rapid API"
+            ],
+            "skills": [
+                "Exercise form correction",
+                "ML models",
+                "OpenCV"
+            ],
+            "durationInMonths": null
+        },
+        {
+            "name": "Aarav Estate",
+            "tools_technologies": [
+                "React",
+                "Redux",
+                "JWT",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Firebase",
+                "Render"
+            ],
+            "skills": [
+                "Real estate marketplace",
+                "User authentication",
+                "Property search"
+            ],
+            "durationInMonths": null
+        }
+    ],
+    "Experience": [
+        {
+            "position": "Web Development Intern",
+            "companyName": "IBM-CSRBOX",
+            "startingPeriod": [
+                "2022"
+            ],
+            "endingPeriod": [
+                "2023"
+            ],
+            "tools_technologies": [
+                "React",
+                "MongoDB",
+                "Firebase",
+                "JWT"
+            ],
+            "skills_learnt": [
+                "Frontend development",
+                "Teamwork",
+                "Time management"
+            ]
+        },
+        {
+            "position": "Tutor",
+            "companyName": "SPJIMR ABYUDAYA",
+            "startingPeriod": [
+                "2022"
+            ],
+            "endingPeriod": [
+                "2023"
+            ],
+            "tools_technologies": [],
+            "skills_learnt": [
+                "Teaching",
+                "Mentoring"
+            ]
+        }
+    ],
+    "Skills": [
+        "C/C++",
+        "Python",
+        "Java",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "MongoDB",
+        "PostgreSQL",
+        "React",
+        "Node.js",
+        "Express.js",
+        "Chakra UI",
+        "TailWind CSS",
+        "TensorFlow",
+        "scikit-learn",
+        "Numpy",
+        "Pandas",
+        "Matplotlib",
+        "Dash",
+        "Plotly",
+        "Git/GitHub",
+        "Unix Shell",
+        "VS Code",
+        "IntelliJ CLion/PyCharm/IDEA",
+        "AI integration",
+        "Interview preparation",
+        "Real-time geolocation",
+        "Hospital resource management",
+        "Exercise form correction",
+        "ML models",
+        "OpenCV",
+        "Real estate marketplace",
+        "User authentication",
+        "Property search",
+        "Frontend development",
+        "Teamwork",
+        "Time management",
+        "Teaching",
+        "Mentoring"
+    ]
+}
